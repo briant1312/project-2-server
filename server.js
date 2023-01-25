@@ -5,6 +5,7 @@ const cors = require('cors')
 const db = require('./config/db')
 const recipeRoutes = require('./routes/recipe-routes')
 const userRoutes = require('./routes/user-routes')
+const ingredientRoutes = require('./routes/ingredients-routes')
 
 const PORT = 3000
 
@@ -22,6 +23,7 @@ app.use(express.json())
 
 app.use(recipeRoutes)
 app.use(userRoutes)
+app.use(ingredientRoutes)
 
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`)

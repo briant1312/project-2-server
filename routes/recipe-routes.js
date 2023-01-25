@@ -7,7 +7,7 @@ const { handle404 } = require('../lib/custom-errors')
 const router = express.Router()
 
 // CREATE
-router.post('/recipes', (req, res, next) => {
+router.post('/recipes', requireToken, (req, res, next) => {
 	Recipe.create(req.body.recipe)
 		.then((recipe) => {
 			res.status(201).json({ recipe })
@@ -16,7 +16,7 @@ router.post('/recipes', (req, res, next) => {
 })
 
 // INDEX
-router.get('/recipes/:userId', (req, res, next) => {
+router.get('/recipes/:userId', requireToken, (req, res, next) => {
 	const { userId } = req.params
 	Recipe.find({ user: userId })
 		.then(handle404)
@@ -28,7 +28,7 @@ router.get('/recipes/:userId', (req, res, next) => {
 })
 
 // SHOW
-router.get('/recipes/show/:recipeId', (req, res, next) => {
+router.get('/recipes/show/:recipeId', requireToken, (req, res, next) => {
 	const { recipeId } = req.params
 	Recipe.findById(recipeId)
 		.then(handle404)
@@ -39,7 +39,7 @@ router.get('/recipes/show/:recipeId', (req, res, next) => {
 })
 
 // UPDATE
-router.patch('/recipes/:recipeId', (req, res, next) => {
+router.patch('/recipes/:recipeId', requireToken, (req, res, next) => {
 	const { recipeId } = req.params
 	Recipe.findById(recipeId)
 		.then(handle404)
@@ -51,7 +51,7 @@ router.patch('/recipes/:recipeId', (req, res, next) => {
 })
 
 // DELETE
-router.delete('/recipes/:recipeId', (req, res, next) => {
+router.delete('/recipes/:recipeId', requireToken, (req, res, next) => {
 	Recipe.findById(req.params.recipeId)
 		.then(handle404)
 		.then((recipe) => {
