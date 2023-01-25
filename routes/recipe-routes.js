@@ -8,15 +8,18 @@ const router = express.Router()
 
 // CREATE
 router.post('/recipes', requireToken, (req, res, next) => {
+	const userId = req.user._id
 	Recipe.create(req.body.recipe)
 		.then((recipe) => {
-			res.status(201).json({ recipe })
+			recipe.user = userId
+			recipe.save()
+			res.status(201).json({ recipe: recipe })
 		})
 		.catch(next)
 })
 
 // INDEX
-router.get('/recipes/', requireToken, (req, res, next) => {
+router.get('/recipes', requireToken, (req, res, next) => {
 	Recipe.find({ user: req.user._id })
 		.then(handle404)
 		.then((recipes) => {
