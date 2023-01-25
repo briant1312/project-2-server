@@ -30,7 +30,7 @@ router.get('/recipes', requireToken, (req, res, next) => {
 })
 
 // SHOW
-router.get('/recipes/show/:recipeId', requireToken, (req, res, next) => {
+router.get('/recipes/:recipeId', requireToken, (req, res, next) => {
 	const { recipeId } = req.params
 	Recipe.findById(recipeId)
 		.then(handle404)
