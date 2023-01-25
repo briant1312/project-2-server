@@ -16,9 +16,8 @@ router.post('/recipes', requireToken, (req, res, next) => {
 })
 
 // INDEX
-router.get('/recipes/:userId', requireToken, (req, res, next) => {
-	const { userId } = req.params
-	Recipe.find({ user: userId })
+router.get('/recipes/', requireToken, (req, res, next) => {
+	Recipe.find({ user: req.user._id })
 		.then(handle404)
 		.then((recipes) => {
 			return recipes.map((recipe) => recipe)
