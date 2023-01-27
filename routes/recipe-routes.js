@@ -32,7 +32,7 @@ router.get('/recipes', requireToken, (req, res, next) => {
 // SHOW
 router.get('/recipes/:recipeId', requireToken, (req, res, next) => {
 	const { recipeId } = req.params
-	Recipe.findById(recipeId)
+	Recipe.findOne({ _id: recipeId, user: req.user._id })
 		.then(handle404)
 		.then(recipe => {
 			res.json({ recipe })
@@ -43,7 +43,7 @@ router.get('/recipes/:recipeId', requireToken, (req, res, next) => {
 // UPDATE
 router.patch('/recipes/:recipeId', requireToken, (req, res, next) => {
 	const { recipeId } = req.params
-	Recipe.findById(recipeId)
+	Recipe.findOne({ _id: recipeId, user: req.user._id })
 		.then(handle404)
 		.then(recipe => {
 			return recipe.updateOne(req.body.recipe)
@@ -54,7 +54,8 @@ router.patch('/recipes/:recipeId', requireToken, (req, res, next) => {
 
 // DELETE
 router.delete('/recipes/:recipeId', requireToken, (req, res, next) => {
-	Recipe.findById(req.params.recipeId)
+	const { recipeId } = req.params
+	Recipe.findOne({ _id: recipeId, user: req.user._id })
 		.then(handle404)
 		.then((recipe) => {
 			recipe.deleteOne()
