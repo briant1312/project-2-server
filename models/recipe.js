@@ -8,8 +8,14 @@ const recipeSchema = new Schema({
         type: String,
         required: true
     },
-    description: String,
-    time: Number,
+    description: {
+        type: String,
+        required: true
+    },
+    time: {
+        type: Number,
+        required: true
+    },
     steps: [{
         type: String,
         require: true

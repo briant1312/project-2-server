@@ -6,11 +6,6 @@ const ingredientSchema = new Schema({
         type: String,
         required: true
     },
-    group: {
-        type: String,
-        required: true,
-        enum: ['vegetable', 'grain', 'fruit', 'dairy', 'protein', 'spice', 'other']
-    },
     qty: {
         type: Number,
         required: true
