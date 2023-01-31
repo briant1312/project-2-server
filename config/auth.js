@@ -2,7 +2,7 @@ const passport = require('passport')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const secret = process.env.JWT_SECRET || 'some string value only your app knows'
+const secret = process.env.JWT_SECRET || 'some random string asdfjkl;'
 
 const { Strategy, ExtractJwt } = require('passport-jwt')
 

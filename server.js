@@ -6,7 +6,7 @@ const db = require('./config/db')
 const recipeRoutes = require('./routes/recipe-routes')
 const userRoutes = require('./routes/user-routes')
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 mongoose.set('strictQuery', true)
 
@@ -16,7 +16,7 @@ mongoose.connect(db, {
 })
 
 const app = express()
-app.use(cors({ origin: `http://127.0.0.1:5500` }))
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://127.0.0.1:5500` }))
 
 app.use(express.json())
 
