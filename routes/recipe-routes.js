@@ -33,6 +33,7 @@ router.get('/allRecipes', requireToken, (req, res, next) => {
 // INDEX
 router.get('/recipes', requireToken, (req, res, next) => {
 	Recipe.find({ user: req.user._id })
+		.populate('user')
 		.then(handle404)
 		.then((recipes) => {
 			return recipes.map((recipe) => recipe)
@@ -45,6 +46,7 @@ router.get('/recipes', requireToken, (req, res, next) => {
 router.get('/recipes/:recipeId', requireToken, (req, res, next) => {
 	const { recipeId } = req.params
 	Recipe.findById(recipeId)
+		.populate('user')
 		.then(handle404)
 		.then(recipe => {
 			res.json({ recipe })
