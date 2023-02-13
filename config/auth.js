@@ -2,6 +2,8 @@ const passport = require('passport')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+// good idea to have comments throughout this code that indicate what each line of code is doing
+
 const secret = process.env.JWT_SECRET || 'some random string asdfjkl;'
 
 const { Strategy, ExtractJwt } = require('passport-jwt')
